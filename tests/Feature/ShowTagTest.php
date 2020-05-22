@@ -11,6 +11,13 @@ class ShowTagTest extends TestCase
 {
     public function testWithOutAnyFilter()
     {
+        Tag::create([
+            'name'=>'tag test 1',
+            'slug'=>'slug test 1',
+            'description'=>'12',
+            'photo'=>'photo_test_1.jpg'
+        ]);
+
         $response = $this->getJson('api/tags');
         $response
             ->assertStatus(200)
@@ -19,7 +26,7 @@ class ShowTagTest extends TestCase
 
     public function testWithSingleColumnFilter1()
     {
-        $response = $this->getJson('api/tags',[
+        $response = $this->get('api/tags',[
             'name'=>'tag test 1'
         ]);
         $response
@@ -157,5 +164,6 @@ class ShowTagTest extends TestCase
                     'description'=>'12',
                 ])->get()->toArray()
             );
+        Tag::destroy(Tag::all()->pluck('id'));
     }
 }

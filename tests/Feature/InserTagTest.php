@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -51,5 +52,6 @@ class InserTagTest extends TestCase
             'photo'=>'photo_test_1.jpg'
         ]);
         $response->assertStatus(201);
+        Tag::destroy(Tag::all()->pluck('id'));
     }
 }
